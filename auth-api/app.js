@@ -1,6 +1,7 @@
 import express from "express";
 
 import * as db from "./scr/config/db/initialData.js";
+import userRoutes from "./scr/modules/user/routes/UserRoutes.js";
 
 const app = express();
 const env = process.env;
@@ -15,6 +16,9 @@ app.get("/api/status", (req, res) => {
         httpStatus: 200,
     });
 });
+
+app.use(express.json());
+app.use(userRoutes);
 
 app.listen(PORT, () => {
     console.info(`Server started successfully at port ${PORT}`);
