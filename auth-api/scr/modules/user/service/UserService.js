@@ -26,7 +26,7 @@ class UserService {
         } catch (err) {
             return {
                 status: err.status ? err.status : httpStatus.INTERNAL_SERVER_ERROR,
-                message: err.status,
+                message: err.message,
             };
         }
     }
@@ -39,7 +39,7 @@ class UserService {
 
     validateUserNotFound(user) {
         if(!user) {
-            throw new Error(httpStatus.BAD_REQUEST, "User was not found.")
+            throw new UserException(httpStatus.BAD_REQUEST, "User was not found.")
         }
     }
 
@@ -67,10 +67,10 @@ class UserService {
                 status: httpStatus.SUCCESS,
                 accessToken,
             };
-        } catch (error) {
+        } catch (err) {
             return {
                 status: err.status ? err.status : httpStatus.INTERNAL_SERVER_ERROR,
-                message: err.status,
+                message: err.message,
             };
         }
     }
